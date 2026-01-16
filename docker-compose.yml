@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=mahz23
+      - POSTGRES_PASSWORD=mahz23
+      - POSTGRES_DB=fintrack
+    volumes:
+      - fintrack:/var/lib/postgresql/data
+
+volumes:
+  fintrack:
