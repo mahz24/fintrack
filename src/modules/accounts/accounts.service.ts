@@ -1,17 +1,20 @@
 import prisma from "../../lib/prisma.js";
 import { AppError } from "../../shared/errors/AppError.js";
+import { verifyUserExists } from "../auth/auth.service.js";
 import type {
   CreateAccountInput,
   UpdateAccountInput,
 } from "./accounts.validation.js";
 
-const verifyUserExists = async (userId: string) => {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
+export const verifyAccountExists = async (
+  accountId: string,
+) => {
+  const account = await prisma.account.findFirst({
+    where: { id: accountId},
   });
 
-  if (!user) {
-    throw new AppError("User not found", 404);
+  if (!account) {
+    throw new AppError("Account not found", 404);
   }
 };
 
@@ -26,6 +29,7 @@ export const getAccounts = async (userId: string) => {
 
 export const getAccountById = async (accountId: string, userId: string) => {
   await verifyUserExists(userId);
+  await verifyAccountExists(accountId);
 
   return prisma.account.findFirst({
     where: { id: accountId, userId },
@@ -35,7 +39,7 @@ export const getAccountById = async (accountId: string, userId: string) => {
 
 export const createAccount = async (
   userId: string,
-  data: CreateAccountInput
+  data: CreateAccountInput,
 ) => {
   await verifyUserExists(userId);
 
@@ -51,22 +55,25 @@ export const createAccount = async (
 export const updateAccount = async (
   accountId: string,
   userId: string,
-  data: UpdateAccountInput
+  data: UpdateAccountInput,
 ) => {
   await verifyUserExists(userId);
+  await verifyAccountExists(accountId);
 
   const cleanedData = Object.fromEntries(
-    Object.entries(data).filter(([_, value]) => value !== undefined)
+    Object.entries(data).filter(([_, value]) => value !== undefined),
   );
+
   return prisma.account.update({
     where: { id: accountId, userId },
     data: cleanedData,
-    include: { user: true }, 
+    include: { user: true },
   });
 };
 
 export const deleteAccount = async (accountId: string, userId: string) => {
   await verifyUserExists(userId);
+  await verifyAccountExists(accountId);
 
   return prisma.account.delete({
     where: { id: accountId, userId },

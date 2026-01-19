@@ -4,6 +4,8 @@ import { generateAccessToken, generateRefreshToken, verifyToken } from "../../sh
 import { comparePassword, hashPassword } from "../../shared/utils/password.js";
 import type { LoginInput, RefreshInput, RegisterInput } from "./auth.validation.js";
 
+
+
 export const register = async (data: RegisterInput) => {
   const existingUser = await prisma.user.findUnique({
     where: { email: data.email },
@@ -85,3 +87,13 @@ export const refresh = async (data: RefreshInput) => {
     accessToken,
   };
 }
+
+export const verifyUserExists = async (userId: string) => {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
+};
