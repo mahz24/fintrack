@@ -5,6 +5,7 @@ import {
   deleteTransactionController,
   getTransactionByIdController,
   getTransactionsController,
+  importTransactionsController,
   updateTransactionController,
 } from "./transactions.controller.js";
 import { validate } from "../../shared/middlewares/validation.middleware.js";
@@ -12,6 +13,7 @@ import {
   transactionSchema,
   updateTransactionSchema,
 } from "./transactions.validation.js";
+import { upload } from "../../config/multer.js";
 
 const router = Router();
 
@@ -26,5 +28,7 @@ router.put(
   updateTransactionController,
 );
 router.delete("/:id", deleteTransactionController);
+
+router.post("/import", upload.single("file"), importTransactionsController);
 
 export default router;
