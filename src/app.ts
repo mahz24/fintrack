@@ -8,7 +8,7 @@ import authRoutes from "./modules/auth/auth.route.js"
 import transactionsRoutes from "./modules/transactions/transaction.route.js"
 import reportsRoutes from "./modules/reports/reports.routes.js";
 import swaggerUi from "swagger-ui-express";
-import { swaggerSpect } from "./config/swagger.js";
+import { swaggerSpec } from "./config/swagger.js";
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpect));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/accounts", accountsRoutes);

@@ -37,4 +37,4 @@ const options: swaggerJSDoc.Options = {
   ],
 };
 
-export const swaggerSpect = swaggerJSDoc(options);
+export const swaggerSpec = swaggerJSDoc(options);
