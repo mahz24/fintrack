@@ -3,11 +3,20 @@ import { env } from "./config/env.js";
 import prisma from "./lib/prisma.js";
 
 async function main() {
-  await prisma.$connect();
+  console.log("Connecting to database...");
 
-  const port = process.env.PORT || env.PORT; // Railway usa process.env.PORT
+  try {
+    await prisma.$connect();
+    console.log("Database connected successfully");
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    throw error;
+  }
 
-  app.listen(port, () => {
+  const port = Number(process.env.PORT) || env.PORT;
+
+  app.listen(port, "0.0.0.0", () => {
+    // Agregar "0.0.0.0"
     console.log(`Server is running on port ${port}`);
   });
 }
