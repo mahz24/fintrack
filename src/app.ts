@@ -7,12 +7,16 @@ import accountsRoutes from "./modules/accounts/accounts.routes.js";
 import categoriesRoutes from "./modules/categories/categories.routes.js";
 import transactionsRoutes from "./modules/transactions/transaction.route.js";
 import reportsRoutes from "./modules/reports/reports.routes.js";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpect } from "./config/swagger.js";
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpect));
 
 app.get("/health", (req, res) => {
   res.status(200).send("OK");
