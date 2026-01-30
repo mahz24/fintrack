@@ -1,5 +1,4 @@
 import swaggerJSDoc from "swagger-jsdoc";
-import { env } from "./env.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -10,14 +9,14 @@ const options: swaggerJSDoc.Options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "FindTrack API",
+      title: "FinTrack API",
       version: "1.0.0",
-      description: "API REST for personal finance manage",
+      description: "API REST for personal finance management",
     },
     servers: [
       {
-        url: `http://localhost:${env.PORT}`,
-        description: "Development server",
+        url: "/",
+        description: "Current server",
       },
     ],
     components: {
