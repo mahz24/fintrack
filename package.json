@@ -7,8 +7,10 @@
     "dev": "nodemon src/server.ts",
     "seed": "npx tsx prisma/seed.ts",
     "build": "tsc",
-    "start": "build && node ./dist/server.js",
-    "test": "vitest run"
+    "start": "node dist/server.js",
+    "test": "vitest run",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
