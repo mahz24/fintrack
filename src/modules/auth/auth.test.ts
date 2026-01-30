@@ -6,6 +6,8 @@ import prisma from "../../lib/prisma.js";
 
 describe("Auth Module", () => {
   beforeEach(async () => {
+    await prisma.transaction.deleteMany();
+    await prisma.account.deleteMany();
     await prisma.user.deleteMany();
   });
 
