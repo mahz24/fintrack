@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import { defineConfig } from "prisma/config";
-import { env } from "./src/config/env.js";
 
 dotenv.config();
 
@@ -11,6 +10,6 @@ export default defineConfig({
     seed: "npx tsx prisma/seed.ts",
   },
   datasource: {
-    url: env.DATABASE_URL,
+    url: process.env.DATABASE_URL,
   },
 });
