@@ -12,7 +12,7 @@ RUN npm ci
 COPY . .
 
 # Variables dummy solo para generar Prisma client
-ARG DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
+ARG DATABASE_URL="postgresql://user:password@localhost:5432/fintrack?schema=public"
 ARG JWT_SECRET="dummy-secret-key-for-build-only-32chars"
 ARG JWT_EXPIRES_IN="15m"
 ARG PORT="3000"
