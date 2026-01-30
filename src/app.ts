@@ -6,6 +6,7 @@ import authRoutes from "./modules/auth/auth.route.js";
 import accountsRoutes from "./modules/accounts/accounts.routes.js";
 import categoriesRoutes from "./modules/categories/categories.routes.js";
 import transactionsRoutes from "./modules/transactions/transaction.route.js";
+import reportsRoutes from "./modules/reports/reports.routes.js";
 
 const app = express();
 
@@ -19,8 +20,9 @@ app.get("/health", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/accounts", accountsRoutes);
-app.use("/api/categories", categoriesRoutes)
+app.use("/api/categories", categoriesRoutes);
 app.use("/api/transactions", transactionsRoutes);
+app.use("/api/reports", reportsRoutes);
 
 app.use(handleError);
 
