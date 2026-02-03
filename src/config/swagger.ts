@@ -5,6 +5,8 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const options: swaggerJSDoc.Options = {
   definition: {
     openapi: "3.0.0",
@@ -30,10 +32,15 @@ const options: swaggerJSDoc.Options = {
     },
     security: [{ bearerAuth: [] }],
   },
-  apis: [
-    path.join(__dirname, "../modules/**/*.routes.ts"),
-    path.join(__dirname, "../modules/**/*.route.ts"),
-  ],
+  apis: isProduction
+    ? [
+        path.join(__dirname, "../modules/**/*.routes.js"),
+        path.join(__dirname, "../modules/**/*.route.js"),
+      ]
+    : [
+        path.join(__dirname, "../modules/**/*.routes.ts"),
+        path.join(__dirname, "../modules/**/*.route.ts"),
+      ],
 };
 
 export const swaggerSpec = swaggerJSDoc(options);
