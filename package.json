@@ -6,7 +6,7 @@
     "nodemon": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts",
     "dev": "nodemon src/server.ts",
     "seed": "npx tsx prisma/seed.ts",
-    "build": "tsc",
+    "build": "npx prisma generate && tsc",
     "start": "node dist/server.js",
     "test": "vitest run",
     "prisma:generate": "prisma generate",

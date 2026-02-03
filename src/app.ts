@@ -4,26 +4,19 @@ import helmet from "helmet";
 import { handleError } from "./shared/middlewares/error.middleware.js";
 import accountsRoutes from "./modules/accounts/accounts.routes.js";
 import categoriesRoutes from "./modules/categories/categories.routes.js";
-import authRoutes from "./modules/auth/auth.route.js"
-import transactionsRoutes from "./modules/transactions/transaction.route.js"
+import authRoutes from "./modules/auth/auth.route.js";
+import transactionsRoutes from "./modules/transactions/transaction.route.js";
 import reportsRoutes from "./modules/reports/reports.routes.js";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger.js";
 
 const app = express();
 
-// Log todas las peticiones
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path}`);
-  next();
-});
-
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
 
 app.get("/health", (req, res) => {
-  console.log("Health check hit");
   res.status(200).json({ status: "ok" });
 });
 
