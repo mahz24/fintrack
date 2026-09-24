@@ -47,7 +47,7 @@ A powerful REST API for personal finance management built with Node.js, TypeScri
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/fintrack.git
+git clone https://github.com/mahz24/fintrack.git
 cd fintrack
 ```
 
